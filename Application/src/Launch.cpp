@@ -2,6 +2,7 @@
 
 int main()
 {
-	testPrint();
+	Engine* engine = new Engine();
+	engine->testPrint();
 	return 0;
 }
