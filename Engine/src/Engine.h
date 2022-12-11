@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Shader.h"
+
 class Engine
 {
 	// Screen sizes, default values set at 800 x 600
