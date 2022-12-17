@@ -25,10 +25,9 @@ Engine::Engine()
 
     while (!glfwWindowShouldClose(m_window))
     {
-        // Draw code
-        glClear(GL_COLOR_BUFFER_BIT);
+        // Clear current buffers
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         // Swap the buffers
@@ -125,14 +124,12 @@ bool Engine::createIndexBuffer(unsigned int indices[])
 
 bool Engine::createShader()
 {
-    Shader vertexShader;
-    vertexShader.createShader("../Engine/src/Shader/BasicVertex.shader", ShaderType::VERTEX);
+    Shader vertexShader("../Engine/src/Shader/BasicVertex.shader", ShaderType::VERTEX);
 
-    Shader fragmentShader;
-    fragmentShader.createShader("../Engine/src/Shader/BasicFragment.shader", ShaderType::FRAGMENT);
+    Shader fragmentShader("../Engine/src/Shader/BasicFragment.shader", ShaderType::FRAGMENT);
 
     // link shaders to a program
-    shaderProgram = glCreateProgram();
+    unsigned int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader.getID());
     glAttachShader(shaderProgram, fragmentShader.getID());
     glLinkProgram(shaderProgram);
