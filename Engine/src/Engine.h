@@ -7,7 +7,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Shader/Shader.h"
-#include "Vertex.h"
 
 // Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc. The purpose is
 // to seperate any code necessary to execute the graphics and computing calculations from the game logic
@@ -25,8 +24,6 @@ class Engine
 	bool m_windowedMode = true;
 
 	GLFWwindow* m_window;
-
-	unsigned int shaderProgram;
 
 	// Initialize GLFW for windowing
 	bool initGLFW();
