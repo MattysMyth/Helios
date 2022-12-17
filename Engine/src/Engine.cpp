@@ -5,6 +5,39 @@ Engine::Engine()
 {
 	initGLFW();
 	initGLAD();
+    float positions[] =
+    {
+        -0.5f, -0.5f,
+        0.0f, 0.5f,
+        0.5f, -0.5f
+    };
+
+    unsigned int indices[] =
+    {
+        0, 1, 2,
+        2, 3, 0
+    };
+
+    createShader();
+    createVertexArray();
+    createVertexBuffer(positions);
+    createIndexBuffer(indices);
+
+    while (!glfwWindowShouldClose(m_window))
+    {
+        // Draw code
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+        // Swap the buffers
+        glfwSwapBuffers(m_window);
+
+        // Poll and process events
+        glfwPollEvents();
+    }
+
 }
 
 Engine::~Engine()
@@ -66,22 +99,63 @@ bool Engine::initGLAD()
 
 bool Engine::createVertexArray()
 {
-    return false;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+    return true;
 }
 
-bool Engine::createVertexBuffer()
+bool Engine::createVertexBuffer(float positions[])
 {
-    return false;
+    glGenBuffers(1, &buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+    return true;
 }
 
-bool Engine::createIndexBuffer()
+bool Engine::createIndexBuffer(unsigned int indices[])
 {
-    return false;
+    glGenBuffers(1, &indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+    return true;
 }
 
 bool Engine::createShader()
 {
-    return false;
+    Shader vertexShader;
+    vertexShader.createShader("../Engine/src/Shader/BasicVertex.shader", ShaderType::VERTEX);
+
+    Shader fragmentShader;
+    fragmentShader.createShader("../Engine/src/Shader/BasicFragment.shader", ShaderType::FRAGMENT);
+
+    // link shaders to a program
+    shaderProgram = glCreateProgram();
+    glAttachShader(shaderProgram, vertexShader.getID());
+    glAttachShader(shaderProgram, fragmentShader.getID());
+    glLinkProgram(shaderProgram);
+    glValidateProgram(shaderProgram);
+    // check for linking errors
+    int success;
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    if (success == GL_FALSE)
+    {
+        int length;
+        glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &length);
+        char* message = (char*)alloca(length * sizeof(char));
+        glGetProgramInfoLog(shaderProgram, length, &length, message);
+        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << message << std::endl;
+    }
+
+    // Delete Shader objects as we've compiled and linked the program
+    glDeleteShader(vertexShader.getID());
+    glDeleteShader(fragmentShader.getID());
+
+    glUseProgram(shaderProgram);
+
+    return true;
 }
 
 void Engine::testPrint()
