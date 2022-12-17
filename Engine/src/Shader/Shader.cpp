@@ -1,16 +1,6 @@
 #include "Shader.h"
 
-Shader::Shader()
-{
-
-}
-
-Shader::~Shader()
-{
-
-}
-
-void Shader::createShader(const std::string& filePath, ShaderType shaderType)
+Shader::Shader(const std::string& filePath, ShaderType shaderType)
 {
     m_Type = shaderType;
     m_SourceString = parseShader(filePath);
@@ -42,6 +32,11 @@ void Shader::createShader(const std::string& filePath, ShaderType shaderType)
         glGetShaderInfoLog(m_ShaderID, length, &length, message);
         std::cout << "ERROR::SHADER::COMPILATION_FAILED\n" << message << std::endl;
     }
+}
+
+Shader::~Shader()
+{
+
 }
 
 std::string Shader::parseShader(const std::string& filePath)

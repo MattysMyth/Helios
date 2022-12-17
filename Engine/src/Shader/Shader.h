@@ -28,10 +28,8 @@ class Shader
 
 public:
 
-	Shader();
+	Shader(const std::string& filePath, ShaderType shaderType);
 	~Shader();
-
-	void createShader(const std::string& filePath, ShaderType shaderType);
 
 	unsigned int getID();
 
