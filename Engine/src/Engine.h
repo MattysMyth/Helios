@@ -6,17 +6,27 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Shader.h"
+#include "Shader/Shader.h"
+#include "Vertex.h"
 
+// Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc. The purpose is
+// to seperate any code necessary to execute the graphics and computing calculations from the game logic
+// and game data stored and handled in the application.
 class Engine
 {
 	// Screen sizes, default values set at 800 x 600
 	unsigned int m_SCREEN_WIDTH = 800;
 	unsigned int m_SCREEN_HEIGHT = 600;
 
+	unsigned int VAO;
+	unsigned int buffer;
+	unsigned int indexBuffer;
+
 	bool m_windowedMode = true;
 
 	GLFWwindow* m_window;
+
+	unsigned int shaderProgram;
 
 	// Initialize GLFW for windowing
 	bool initGLFW();
@@ -40,10 +50,10 @@ public:
 	bool createVertexArray();
 
 	// Initialize Vertex Buffer
-	bool createVertexBuffer();
+	bool createVertexBuffer(float positions[]);
 
 	// Initialize Index Buffer
-	bool createIndexBuffer();
+	bool createIndexBuffer(unsigned int indices[]);
 
 	// Initialize Shader
 	bool createShader();
