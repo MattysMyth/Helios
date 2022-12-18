@@ -24,13 +24,6 @@ Engine::Engine()
         vert3
     };
 
-   /* float positions[] =
-    {
-        -0.5f, -0.5f,
-        0.0f, 0.5f,
-        0.5f, -0.5f
-    };*/
-
     unsigned int indices[] =
     {
         0, 1, 2
@@ -158,7 +151,7 @@ bool Engine::createIndexBuffer(unsigned int indices[])
 {
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
     return true;
 }
 
