@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <vector>
+
 #include "Shader/Shader.h"
 #include "Vertex.h"
 
@@ -48,7 +50,8 @@ public:
 	bool createVertexArray();
 
 	// Initialize Vertex Buffer
-	bool createVertexBuffer(float positions[]);
+	//bool createVertexBuffer(float positions[]);
+	bool createVertexBuffer(Vertex verticies[]);
 
 	// Initialize Index Buffer
 	bool createIndexBuffer(unsigned int indices[]);
