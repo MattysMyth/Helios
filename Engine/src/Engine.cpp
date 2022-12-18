@@ -125,7 +125,7 @@ bool Engine::createVertexBuffer(Vertex verticies[])
 {
     std::vector<float> positions;
 
-    for (size_t i = 0; i < (sizeof(verticies)/sizeof(Vertex)); i++)
+    for (size_t i = 0; i < 3; i++)
     {
         positions.push_back(verticies[i].position.x);
         positions.push_back(verticies[i].position.y);
