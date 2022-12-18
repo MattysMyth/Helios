@@ -5,6 +5,7 @@ Engine::Engine()
 {
 	initGLFW();
 	initGLAD();
+
     float positions[] =
     {
         -0.5f, -0.5f,
