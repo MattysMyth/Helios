@@ -114,7 +114,7 @@ bool Engine::createVertexArray()
     return true;
 }
 
-bool Engine::createVertexBuffer(Vertex verticies[])
+bool Engine::createVertexBuffer(std::vector<Vertex> verticies)
 {
     std::vector<float> positions;
 
