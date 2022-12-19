@@ -10,6 +10,7 @@
 
 #include "Shader/Shader.h"
 #include "Vertex.h"
+#include "VBO.h"
 
 // Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc. The purpose is
 // to seperate any code necessary to execute the graphics and computing calculations from the game logic
@@ -21,7 +22,7 @@ class Engine
 	unsigned int m_SCREEN_HEIGHT = 600;
 
 	unsigned int VAO;
-	unsigned int buffer;
+	VBO* vbo;
 	unsigned int indexBuffer;
 
 	bool m_windowedMode = true;
@@ -48,10 +49,6 @@ public:
 
 	// Initialize Vertex Array Object
 	bool createVertexArray();
-
-	// Initialize Vertex Buffer
-	//bool createVertexBuffer(float positions[]);
-	bool createVertexBuffer(std::vector<Vertex> verticies);
 
 	// Initialize Index Buffer
 	bool createIndexBuffer(unsigned int indices[]);
