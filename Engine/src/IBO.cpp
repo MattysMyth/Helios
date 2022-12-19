@@ -26,7 +26,7 @@ IBO::IBO(std::vector<unsigned int> indices)
 
 IBO::~IBO()
 {
-
+	glDeleteBuffers(1, &id);
 }
 
 void IBO::update(std::vector<unsigned int> indices)
