@@ -22,10 +22,10 @@ Engine::Engine()
     verticies.push_back(vert2);
     verticies.push_back(vert3);
 
-    unsigned int indices[] =
-    {
-        0, 1, 2
-    };
+    std::vector<unsigned int> indices;
+    indices.push_back(0);
+    indices.push_back(1);
+    indices.push_back(2);
 
     // Create a Shader Program
     createShader();
@@ -34,7 +34,7 @@ Engine::Engine()
     // Initialize a Vertex Buffer Object
     vbo = new VBO(verticies);
     // Initialize a Index Buffer Object
-    createIndexBuffer(indices);
+    ibo = new IBO(indices);
 
     // Run the main render loop
     while (!glfwWindowShouldClose(m_window))
@@ -115,14 +115,6 @@ bool Engine::createVertexArray()
 {
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
-    return true;
-}
-
-bool Engine::createIndexBuffer(unsigned int indices[])
-{
-    glGenBuffers(1, &indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
     return true;
 }
 
