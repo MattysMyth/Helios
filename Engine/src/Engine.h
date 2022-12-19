@@ -42,8 +42,6 @@ class Engine
 
 public:
 
-	void testPrint();
-
 	// Engine constructor. Will initialize a main GLFW window and load GLAD to be used for OpenGL calls.
 	// Important for inital GLFW and GLAD load order to be controlled otherwise GLAD will not load correctly.
 	Engine();

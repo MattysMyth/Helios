@@ -144,8 +144,3 @@ bool Engine::createShader()
 
     return true;
 }
-
-void Engine::testPrint()
-{
-	std::cout << "Hello World" << std::endl;
-}
