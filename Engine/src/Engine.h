@@ -12,6 +12,7 @@
 #include "Vertex.h"
 #include "VBO.h"
 #include "IBO.h"
+#include "VAO.h"
 
 // Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc. The purpose is
 // to seperate any code necessary to execute the graphics and computing calculations from the game logic
@@ -22,7 +23,7 @@ class Engine
 	unsigned int m_SCREEN_WIDTH = 800;
 	unsigned int m_SCREEN_HEIGHT = 600;
 
-	unsigned int VAO;
+	VAO* vao;
 	VBO* vbo;
 	IBO* ibo;
 
@@ -47,9 +48,6 @@ public:
 	// Important for inital GLFW and GLAD load order to be controlled otherwise GLAD will not load correctly.
 	Engine();
 	~Engine();
-
-	// Initialize Vertex Array Object
-	bool createVertexArray();
 
 	// Initialize Shader
 	bool createShader();
