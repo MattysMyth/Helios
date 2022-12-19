@@ -52,11 +52,14 @@ Engine::Engine()
         glfwPollEvents();
     }
 
+
+
 }
 
 Engine::~Engine()
 {
-
+    delete vbo;
+    delete ibo;
 }
 
 void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height)
