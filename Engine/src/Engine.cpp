@@ -17,28 +17,32 @@ Engine::Engine()
     vert3.position.x = 0.5f;
     vert3.position.y = -0.5f;
 
-    Vertex verticies[3] =
-    {
-        vert1,
-        vert2,
-        vert3
-    };
+    std::vector<Vertex> verticies;
+    verticies.push_back(vert1);
+    verticies.push_back(vert2);
+    verticies.push_back(vert3);
 
     unsigned int indices[] =
     {
         0, 1, 2
     };
 
+    // Create a Shader Program
     createShader();
+    // Initialize a Vertex Array Object
     createVertexArray();
-    createVertexBuffer(verticies);
+    // Initialize a Vertex Buffer Object
+    vbo = new VBO(verticies);
+    // Initialize a Index Buffer Object
     createIndexBuffer(indices);
 
+    // Run the main render loop
     while (!glfwWindowShouldClose(m_window))
     {
         // Clear current buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // Draw call
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         // Swap the buffers
@@ -111,39 +115,6 @@ bool Engine::createVertexArray()
 {
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
-    return true;
-}
-
-bool Engine::createVertexBuffer(std::vector<Vertex> verticies)
-{
-    std::vector<float> positions;
-
-    for (size_t i = 0; i < 3; i++)
-    {
-        positions.push_back(verticies[i].position.x);
-        positions.push_back(verticies[i].position.y);
-        positions.push_back(verticies[i].position.z);
-    }
-
-    glGenBuffers(1, &buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(
-        GL_ARRAY_BUFFER, 
-        sizeof(float) * positions.size(),
-        static_cast<void*>(positions.data()),
-        GL_STATIC_DRAW
-    );
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(
-        0, 
-        2, 
-        GL_FLOAT, 
-        GL_FALSE, 
-        sizeof(float) * 3, 
-        0
-    );
-
     return true;
 }
 
