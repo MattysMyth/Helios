@@ -30,7 +30,7 @@ Engine::Engine()
     // Create a Shader Program
     createShader();
     // Initialize a Vertex Array Object
-    createVertexArray();
+    vao = new VAO();
     // Initialize a Vertex Buffer Object
     vbo = new VBO(verticies);
     // Initialize a Index Buffer Object
@@ -51,8 +51,6 @@ Engine::Engine()
         // Poll and process events
         glfwPollEvents();
     }
-
-
 
 }
 
@@ -111,13 +109,6 @@ bool Engine::initGLAD()
         return false;
     }
 
-    return true;
-}
-
-bool Engine::createVertexArray()
-{
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
     return true;
 }
 
