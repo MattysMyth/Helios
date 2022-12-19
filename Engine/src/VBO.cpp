@@ -45,7 +45,7 @@ VBO::VBO(std::vector<Vertex> verticies)
 
 VBO::~VBO()
 {
-
+    glDeleteBuffers(1, &id);
 }
 
 void VBO::update(std::vector<Vertex> verticies)
