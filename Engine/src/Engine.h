@@ -51,7 +51,7 @@ public:
 
 	// Initialize Vertex Buffer
 	//bool createVertexBuffer(float positions[]);
-	bool createVertexBuffer(Vertex verticies[]);
+	bool createVertexBuffer(std::vector<Vertex> verticies);
 
 	// Initialize Index Buffer
 	bool createIndexBuffer(unsigned int indices[]);
