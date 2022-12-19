@@ -30,16 +30,16 @@
     <ClCompile Include="src\Shader\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Vertex.cpp">
+    <ClCompile Include="src\Renderer\Vertex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\VBO.cpp">
+    <ClCompile Include="src\Renderer\VBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\IBO.cpp">
+    <ClCompile Include="src\Renderer\IBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\VAO.cpp">
+    <ClCompile Include="src\Renderer\VAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -494,16 +494,16 @@
     <ClInclude Include="include\GLFW\glfw3native.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Vertex.h">
+    <ClInclude Include="src\Renderer\Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\VBO.h">
+    <ClInclude Include="src\Renderer\VBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\IBO.h">
+    <ClInclude Include="src\Renderer\IBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\VAO.h">
+    <ClInclude Include="src\Renderer\VAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

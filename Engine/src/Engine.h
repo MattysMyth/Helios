@@ -9,10 +9,10 @@
 #include <vector>
 
 #include "Shader/Shader.h"
-#include "Vertex.h"
-#include "VBO.h"
-#include "IBO.h"
-#include "VAO.h"
+#include "Renderer/Vertex.h"
+#include "Renderer/VBO.h"
+#include "Renderer/IBO.h"
+#include "Renderer/VAO.h"
 
 // Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc. The purpose is
 // to seperate any code necessary to execute the graphics and computing calculations from the game logic
