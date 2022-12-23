@@ -13,6 +13,7 @@
 #include "Renderer/VBO.h"
 #include "Renderer/IBO.h"
 #include "Renderer/VAO.h"
+#include "Entity/Entity.h"
 
 // Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc. The purpose is
 // to seperate any code necessary to execute the graphics and computing calculations from the game logic
@@ -49,6 +50,10 @@ public:
 
 	// Initialize Shader
 	bool createShader();
+
+	void render();
+
+	void loadModel(Entity* entity);
 
 };
 
