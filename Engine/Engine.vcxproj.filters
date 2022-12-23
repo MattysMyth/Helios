@@ -42,6 +42,9 @@
     <ClCompile Include="src\Renderer\VAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Entity\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\glm\detail\_features.hpp">
@@ -504,6 +507,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer\VAO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
