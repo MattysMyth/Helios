@@ -6,22 +6,6 @@ Engine::Engine()
 	initGLFW();
 	initGLAD();
 
-    Vertex vert1, vert2, vert3;
-
-    vert1.position.x = -0.5f;
-    vert1.position.y = -0.5f;
-    
-    vert2.position.x = 0.0f;
-    vert2.position.y = 0.5f;
-
-    vert3.position.x = 0.5f;
-    vert3.position.y = -0.5f;
-
-    std::vector<Vertex> verticies;
-    verticies.push_back(vert1);
-    verticies.push_back(vert2);
-    verticies.push_back(vert3);
-
     std::vector<unsigned int> indices;
     indices.push_back(0);
     indices.push_back(1);
@@ -32,25 +16,9 @@ Engine::Engine()
     // Initialize a Vertex Array Object
     vao = new VAO();
     // Initialize a Vertex Buffer Object
-    vbo = new VBO(verticies);
+    vbo = new VBO();
     // Initialize a Index Buffer Object
     ibo = new IBO(indices);
-
-    // Run the main render loop
-    while (!glfwWindowShouldClose(m_window))
-    {
-        // Clear current buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // Draw call
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-
-        // Swap the buffers
-        glfwSwapBuffers(m_window);
-
-        // Poll and process events
-        glfwPollEvents();
-    }
 
 }
 
@@ -143,4 +111,28 @@ bool Engine::createShader()
     glUseProgram(shaderProgram);
 
     return true;
+}
+
+void Engine::render()
+{
+    // Run the main render loop
+    while (!glfwWindowShouldClose(m_window))
+    {
+        // Clear current buffers
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // Draw call
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+        // Swap the buffers
+        glfwSwapBuffers(m_window);
+
+        // Poll and process events
+        glfwPollEvents();
+    }
+}
+
+void Engine::loadModel(Entity* entity)
+{
+    vbo->update(entity->verticies);
 }
