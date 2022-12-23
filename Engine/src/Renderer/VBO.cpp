@@ -10,6 +10,16 @@ VBO::VBO()
         NULL,
         GL_STATIC_DRAW
     );
+
+    glEnableVertexAttribArray(index);
+    glVertexAttribPointer(
+        index,
+        3, // Corresponding to x, y and z values
+        GL_FLOAT,
+        GL_FALSE,
+        sizeof(float) * 3, // 3 being the size of each set of x, y and z values
+        0
+    );
 }
 
 VBO::VBO(std::vector<Vertex> verticies)
