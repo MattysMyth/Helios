@@ -43,6 +43,7 @@ public:
 
 	Transform transform;
 	std::vector<Vertex> verticies;
+	std::vector<unsigned int> indices;
 
 	virtual void update();
 
