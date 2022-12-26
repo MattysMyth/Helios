@@ -4,12 +4,7 @@
 Engine::Engine()
 {
 	initGLFW();
-	initGLAD();
-
-    std::vector<unsigned int> indices;
-    indices.push_back(0);
-    indices.push_back(1);
-    indices.push_back(2);
+    initGLAD();
 
     // Create a Shader Program
     createShader();
@@ -18,7 +13,7 @@ Engine::Engine()
     // Initialize a Vertex Buffer Object
     vbo = new VBO();
     // Initialize a Index Buffer Object
-    ibo = new IBO(indices);
+    ibo = new IBO();
 
 }
 
@@ -122,7 +117,7 @@ void Engine::render()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Draw call
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 
         // Swap the buffers
         glfwSwapBuffers(m_window);
@@ -132,7 +127,26 @@ void Engine::render()
     }
 }
 
-void Engine::loadModel(Entity* entity)
+void Engine::loadEntities(std::vector<Entity*> entities)
 {
-    vbo->update(entity->verticies);
+    std::vector<Vertex> verticies;
+    std::vector<unsigned int> indices;
+    unsigned int indexOffset = 0;
+
+    for (Entity* entity : entities)
+    {
+        verticies.insert(verticies.end(), entity->verticies.begin(), entity->verticies.end());
+
+        for (unsigned int index : entity->indices)
+        {
+            indices.push_back(index + indexOffset);
+        }
+
+        indexOffset = indexOffset + entity->verticies.size();
+    }
+
+    vbo->update(verticies);
+    ibo->update(indices);
+
+    indexCount = indices.size();
 }
