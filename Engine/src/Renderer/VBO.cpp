@@ -62,7 +62,7 @@ void VBO::update(std::vector<Vertex> verticies)
 {
     std::vector<float> positions;
 
-    for (size_t i = 0; i < 3; i++)
+    for (size_t i = 0; i < verticies.size(); i++)
     {
         positions.push_back(verticies[i].position.x);
         positions.push_back(verticies[i].position.y);
