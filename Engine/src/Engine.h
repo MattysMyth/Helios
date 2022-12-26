@@ -15,14 +15,18 @@
 #include "Renderer/VAO.h"
 #include "Entity/Entity.h"
 
-// Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc. The purpose is
-// to seperate any code necessary to execute the graphics and computing calculations from the game logic
-// and game data stored and handled in the application.
+/*
+Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc.The purpose is
+to seperate any code necessary to execute the graphics and computing calculations from the game logic
+and game data stored and handled in the application.
+*/
 class Engine
 {
 	// Screen sizes, default values set at 800 x 600
 	unsigned int m_SCREEN_WIDTH = 800;
 	unsigned int m_SCREEN_HEIGHT = 600;
+
+	unsigned int indexCount;
 
 	VAO* vao;
 	VBO* vbo;
@@ -43,8 +47,10 @@ class Engine
 
 public:
 
-	// Engine constructor. Will initialize a main GLFW window and load GLAD to be used for OpenGL calls.
-	// Important for inital GLFW and GLAD load order to be controlled otherwise GLAD will not load correctly.
+	/*
+	Engine constructor. Will initialize a main GLFW window and load GLAD to be used for OpenGL calls.
+	Important for inital GLFW and GLAD load order to be controlled otherwise GLAD will not load correctly.
+	*/
 	Engine();
 	~Engine();
 
@@ -53,7 +59,10 @@ public:
 
 	void render();
 
-	void loadModel(Entity* entity);
+	/*
+	Takes a vector of all entities to be loaded into the Vertex Buffer and Index Buffer on the GPU
+	*/
+	void loadEntities(std::vector<Entity*> entities);
 
 };
 
