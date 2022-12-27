@@ -5,6 +5,9 @@
 #include <vector>
 #include "Vertex.h"
 
+#define positionIndex 0
+#define colorIndex 1
+
 // Structure to hold all data relating to a generated Vertex Buffer Object in OpenGL
 struct VBO
 {
@@ -21,7 +24,8 @@ struct VBO
 
 private:
 	unsigned int id;
-	unsigned int index = 0;
+
+	void setVertexAttributes();
 
 };
 
