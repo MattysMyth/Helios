@@ -20,9 +20,9 @@ Triangle2::Triangle2()
 
     vert3.position.x = 0.5f;
     vert3.position.y = -0.5f;
-    vert3.color.red = 1.0f;
+    vert3.color.red = 0.0f;
     vert3.color.green = 0.0f;
-    vert3.color.blue = 0.0f;
+    vert3.color.blue = 1.0f;
     vert3.color.alpha = 1.0f;
 
     verticies.push_back(vert1);
