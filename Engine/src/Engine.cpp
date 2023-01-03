@@ -3,9 +3,10 @@
 
 Engine::Engine()
 {
-	initGLFW();
+    // Initialize a Window using GLFW
+    window = new Window();
+    // Load GLAD for OpenGL function calls
     initGLAD();
-
     // Create a Shader Program
     createShader();
     // Initialize a Vertex Array Object
@@ -14,53 +15,13 @@ Engine::Engine()
     vbo = new VBO();
     // Initialize a Index Buffer Object
     ibo = new IBO();
-
+    
 }
 
 Engine::~Engine()
 {
     delete vbo;
     delete ibo;
-}
-
-void Engine::framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-
-bool Engine::initGLFW()
-{
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    GLFWmonitor* monitorWindow = NULL;
-    if (!m_windowedMode)
-    {
-        monitorWindow = glfwGetPrimaryMonitor();
-        const GLFWvidmode* monitorMode = glfwGetVideoMode(monitorWindow);
-        m_SCREEN_WIDTH = monitorMode->width;
-        m_SCREEN_HEIGHT = monitorMode->height;
-    }
-
-    // Initialise a window, throw an error if window failed to initialise
-    m_window = glfwCreateWindow(m_SCREEN_WIDTH, m_SCREEN_HEIGHT, "Window Title", monitorWindow, NULL);
-    if (m_window == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return false;
-    }
-    glfwMakeContextCurrent(m_window);
-
-    // Set what function to call when the window is resized, passed as a parameter
-    glfwSetFramebufferSizeCallback(m_window, framebuffer_size_callback);
-
-    // Set framerate
-    glfwSwapInterval(10);
-
-    return true;
 }
 
 bool Engine::initGLAD()
@@ -105,22 +66,38 @@ bool Engine::createShader()
 
     glUseProgram(shaderProgram);
 
+    // Orthographic view from the camera (Projection)
+    glm::mat4 projection = glm::ortho(-5.0f, 5.0f, -5.0f, 5.0f, -1.0f, 1.0f);
+
+    // Camera Matrix (View)
+    glm::mat4 view(1.0f);
+
+    // Model Matrix (Model)
+   glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, -4.0f, 0.0f));
+
+    mvp = projection * view * model;
+
+    matrixID = glGetUniformLocation(shaderProgram, "mvp");
+
     return true;
 }
 
 void Engine::render()
 {
     // Run the main render loop
-    while (!glfwWindowShouldClose(m_window))
+    while (!glfwWindowShouldClose(window->m_instance))
     {
         // Clear current buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        // Send mvp matrix to the Shader on the GPU
+        glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 
         // Draw call
         glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 
         // Swap the buffers
-        glfwSwapBuffers(m_window);
+        glfwSwapBuffers(window->m_instance);
 
         // Poll and process events
         glfwPollEvents();

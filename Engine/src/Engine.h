@@ -14,6 +14,7 @@
 #include "Renderer/IBO.h"
 #include "Renderer/VAO.h"
 #include "Entity/Entity.h"
+#include "../Window.h"
 
 /*
 Engine is the object responsible for running all Rendering, Physics, Lighting, Sound, etc.The purpose is
@@ -27,20 +28,22 @@ class Engine
 	unsigned int m_SCREEN_HEIGHT = 600;
 
 	unsigned int indexCount;
+	unsigned int matrixID;
+
+	glm::mat4 mvp;
 
 	VAO* vao;
 	VBO* vbo;
 	IBO* ibo;
 
+	Window* window;
+
 	bool m_windowedMode = true;
-
-	GLFWwindow* m_window;
-
-	// Initialize GLFW for windowing
-	bool initGLFW();
 
 	// Sets glViewport with given width and height. Used as a function to be called on resize
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+	static void keyEvent(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 	// Initialize GLAD for OpenGL calls
 	bool initGLAD();
