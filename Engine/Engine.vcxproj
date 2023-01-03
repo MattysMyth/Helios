@@ -28,6 +28,7 @@
     <ClCompile Include="src\Renderer\VAO.cpp" />
     <ClCompile Include="src\Renderer\VBO.cpp" />
     <ClCompile Include="src\Renderer\Vertex.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\glad\glad.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="src\Renderer\VAO.h" />
     <ClInclude Include="src\Renderer\VBO.h" />
     <ClInclude Include="src\Renderer\Vertex.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\glm\detail\func_common.inl" />
