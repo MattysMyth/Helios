@@ -47,42 +47,84 @@ void Window::keyEventCallback(GLFWwindow* window, int key, int scancode, int act
     instance->keyEvent(key, action);
 }
 
-void Window::addBinding(int key, const Callback callback)
-{
-    m_Callbacks.insert({ key, callback });
-}
-
-void Window::removeBinding(int key)
-{
-    m_Callbacks.erase(key);
-}
-
-void Window::swapBinding(int formerKey, int newKey)
-{
-    Callback callback = m_Callbacks.at(formerKey);
-    removeBinding(formerKey);
-    addBinding(newKey, callback);
-}
-
 void Window::keyEvent(int key, int action)
 {
     if (action == GLFW_PRESS)
     {
         onKeyPress(key);
     }
+    else if (action == GLFW_RELEASE)
+    {
+        onKeyRelease(key);
+    }
+    else if (action == GLFW_REPEAT)
+    {
+        onKeyHold(key);
+    }
+}
+
+void Window::addKeyPressBinding(int key, const Callback callback)
+{
+    m_KeyPressCallbacks.insert({ key, callback });
+}
+
+void Window::addKeyReleaseBinding(int key, const Callback callback)
+{
+    m_KeyReleaseCallbacks.insert({key, callback});
+}
+
+void Window::addKeyHoldBinding(int key, const Callback callback)
+{
+    m_KeyHoldCallbacks.insert({ key, callback });
+}
+
+void Window::removeKeyPressBinding(int key)
+{
+    m_KeyPressCallbacks.erase(key);
+}
+
+void Window::removeKeyReleaseBinding(int key)
+{
+    m_KeyReleaseCallbacks.erase(key);
+}
+
+void Window::removeKeyHoldBinding(int key)
+{
+    m_KeyHoldCallbacks.erase(key);
+}
+
+void Window::swapKeyPressBinding(int formerKey, int newKey)
+{
+    Callback callback = m_KeyPressCallbacks.at(formerKey);
+    removeKeyPressBinding(formerKey);
+    addKeyPressBinding(newKey, callback);
+}
+
+void Window::swapKeyReleaseBinding(int formerKey, int newKey)
+{
+    Callback callback = m_KeyReleaseCallbacks.at(formerKey);
+    removeKeyReleaseBinding(formerKey);
+    addKeyReleaseBinding(newKey, callback);
+}
+
+void Window::swapKeyHoldBinding(int formerKey, int newKey)
+{
+    Callback callback = m_KeyHoldCallbacks.at(formerKey);
+    removeKeyHoldBinding(formerKey);
+    addKeyHoldBinding(newKey, callback);
 }
 
 void Window::onKeyPress(int key)
 {
-    
+    m_KeyPressCallbacks[key];
 }
 
 void Window::onKeyRelease(int key)
 {
-
+    m_KeyReleaseCallbacks[key];
 }
 
 void Window::onKeyHold(int key)
 {
-
+    m_KeyHoldCallbacks[key];
 }

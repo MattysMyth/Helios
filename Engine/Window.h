@@ -21,17 +21,49 @@ public:
 	Adds a binding between a given functionand the key pressed. When pressed, GLFW will register the event and when polled will  
 	call the bound function
 	*/
-	void addBinding(int key, const Callback callback);
+	void addKeyPressBinding(int key, const Callback callback);
 
 	/*
-	Removes any function binding on the given key
+	Adds a binding between a given functionand the key released. When released, GLFW will register the event and when polled will
+	call the bound function
 	*/
-	void removeBinding(int key);
+	void addKeyReleaseBinding(int key, const Callback callback);
 
 	/*
-	Swaps the key associated with a bound function
+	Adds a binding between a given functionand the key held. When held, GLFW will register the event and when polled will
+	call the bound function
 	*/
-	void swapBinding(int formerKey, int newKey);
+	void addKeyHoldBinding(int key, const Callback callback);
+
+	/*
+	Removes any key press function binding on the given key
+	*/
+	void removeKeyPressBinding(int key);
+
+	/*
+	Removes any key release function binding on the given key
+	*/
+	void removeKeyReleaseBinding(int key);
+
+	/*
+	Removes any key hold function binding on the given key
+	*/
+	void removeKeyHoldBinding(int key);
+
+	/*
+	Swaps the key associated with a bound key press function
+	*/
+	void swapKeyPressBinding(int formerKey, int newKey);
+
+	/*
+	Swaps the key associated with a bound key release function
+	*/
+	void swapKeyReleaseBinding(int formerKey, int newKey);
+
+	/*
+	Swaps the key associated with a bound key hold function
+	*/
+	void swapKeyHoldBinding(int formerKey, int newKey);
 
 	/*
 	Executes bound functions for pressed keys
@@ -61,9 +93,19 @@ public:
 
 private:
 	/*
-	Map of all bound functions and associated keys
+	Map of all bound key press functions and associated keys
 	*/
-    std::map<int, Callback> m_Callbacks;
+    std::map<int, Callback> m_KeyPressCallbacks;
+
+	/*
+	Map of all bound key release functions and associated keys
+	*/
+	std::map<int, Callback> m_KeyReleaseCallbacks;
+
+	/*
+	Map of all bound key hold functions and associated keys
+	*/
+	std::map<int, Callback> m_KeyHoldCallbacks;
 
 	/*
 	Window width, default value set to 800 pixels
