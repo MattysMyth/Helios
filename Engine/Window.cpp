@@ -27,6 +27,7 @@ Window::Window()
 
     glfwSetWindowUserPointer(m_instance, this);
     
+    glfwSetFramebufferSizeCallback(m_instance, framebuffer_size_callback);
     glfwSetKeyCallback(m_instance, keyEventCallback);
 }
 
