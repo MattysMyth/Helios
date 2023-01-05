@@ -17,6 +17,8 @@ public:
 	Window();
 	~Window();
 
+	void defaultEscape();
+
 	/*
 	Adds a binding between a given functionand the key pressed. When pressed, GLFW will register the event and when polled will  
 	call the bound function

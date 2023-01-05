@@ -1,5 +1,10 @@
 #include "Window.h"
 
+void Window::defaultEscape()
+{
+    glfwSetWindowShouldClose(m_instance, true);
+}
+
 Window::Window()
 {
     glfwInit();
@@ -29,6 +34,8 @@ Window::Window()
     
     glfwSetFramebufferSizeCallback(m_instance, framebuffer_size_callback);
     glfwSetKeyCallback(m_instance, keyEventCallback);
+
+    addKeyPressBinding(GLFW_KEY_ESCAPE, [this]() {this->defaultEscape(); });
 }
 
 Window::~Window()
@@ -116,15 +123,15 @@ void Window::swapKeyHoldBinding(int formerKey, int newKey)
 
 void Window::onKeyPress(int key)
 {
-    m_KeyPressCallbacks[key];
+    std::invoke(m_KeyPressCallbacks[key]);
 }
 
 void Window::onKeyRelease(int key)
 {
-    m_KeyReleaseCallbacks[key];
+    std::invoke(m_KeyReleaseCallbacks[key]);
 }
 
 void Window::onKeyHold(int key)
 {
-    m_KeyHoldCallbacks[key];
+    std::invoke(m_KeyHoldCallbacks[key]);
 }
