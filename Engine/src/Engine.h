@@ -36,8 +36,6 @@ class Engine
 	VBO* vbo;
 	IBO* ibo;
 
-	Window* window;
-
 	bool m_windowedMode = true;
 
 	// Sets glViewport with given width and height. Used as a function to be called on resize
@@ -49,6 +47,8 @@ class Engine
 	bool initGLAD();
 
 public:
+
+	Window* window;
 
 	/*
 	Engine constructor. Will initialize a main GLFW window and load GLAD to be used for OpenGL calls.
