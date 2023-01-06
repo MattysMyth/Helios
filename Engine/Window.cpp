@@ -1,10 +1,5 @@
 #include "Window.h"
 
-void Window::defaultEscape()
-{
-    glfwSetWindowShouldClose(m_instance, true);
-}
-
 Window::Window()
 {
     glfwInit();
@@ -41,6 +36,11 @@ Window::Window()
 Window::~Window()
 {
     
+}
+
+void Window::defaultEscape()
+{
+    glfwSetWindowShouldClose(m_instance, true);
 }
 
 void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
