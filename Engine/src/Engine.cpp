@@ -4,7 +4,7 @@
 Engine::Engine()
 {
     // Initialize a Window using GLFW
-    window = new Window();
+    window = new Helios::Window();
     // Load GLAD for OpenGL function calls
     initGLAD();
     // Create a Shader Program
@@ -85,7 +85,7 @@ bool Engine::createShader()
 void Engine::render()
 {
     // Run the main render loop
-    while (!glfwWindowShouldClose(window->m_instance))
+    while (!glfwWindowShouldClose(window->m_GLFWinstance))
     {
         // Clear current buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -97,7 +97,7 @@ void Engine::render()
         glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);
 
         // Swap the buffers
-        glfwSwapBuffers(window->m_instance);
+        glfwSwapBuffers(window->m_GLFWinstance);
 
         // Poll and process events
         glfwPollEvents();
