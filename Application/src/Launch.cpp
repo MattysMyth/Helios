@@ -2,6 +2,8 @@
 #include "Triangle1.h"
 #include "Triangle2.h"
 
+using namespace Helios;
+
 int main()
 {
 	Engine* engine = new Engine();
@@ -14,6 +16,8 @@ int main()
 	entities.push_back(triangle2);
 
 	engine->loadEntities(entities);
+
+	Input::addKeyPressBinding(engine->window, GLFW_KEY_SPACE, [engine]() {Helios::Input::defaultEscape(engine->window); });
 
 	engine->render();
 	
