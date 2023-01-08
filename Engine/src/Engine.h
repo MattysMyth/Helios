@@ -48,7 +48,7 @@ class Engine
 
 public:
 
-	Window* window;
+	Helios::Window* window;
 
 	/*
 	Engine constructor. Will initialize a main GLFW window and load GLAD to be used for OpenGL calls.
